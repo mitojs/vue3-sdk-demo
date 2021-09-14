@@ -37,6 +37,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ],
       dedupe: ["vue"],
     },
+    css: {
+      preprocessorOptions: {
+        less: {
+          modifyVars: {},
+          javascriptEnabled: true,
+        },
+      },
+    },
     plugins: [vue(), htmlPlugin(htmlPluginOpt)],
     server: {
       host: true,

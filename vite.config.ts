@@ -22,7 +22,7 @@ function pathResolve(dir: string) {
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   return {
-    base: "/",
+    base: "/vue3-sdk-demo",
     esbuild: {},
     resolve: {
       alias: [

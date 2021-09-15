@@ -2,7 +2,11 @@
   <n-layout class="layout" has-sider>
     <n-layout-sider width="200" class="layout-sider">
       <Logo></Logo>
-      <n-menu :options="menus" />
+      <n-menu
+        :value="getSelectedKeys"
+        @update:value="onMenuClick"
+        :options="menus"
+      />
     </n-layout-sider>
     <n-layout>
       <n-layout-header class="layout-header" position="static">
@@ -11,10 +15,20 @@
         </n-icon>
       </n-layout-header>
 
-      <n-layout-content class="layout-content">
-        <div class="layout-content-main">
-          <div class="main-view">123123123</div>
-        </div>
+      <n-layout-content>
+        <main class="layout-content">
+          <n-alert style="margin-bottom: 14px" title="提示信息" type="info">
+            右侧的Breadcrumb组件会实时打印的你操作行为。控制台会打印当前收集的信息
+          </n-alert>
+          <div class="container">
+            <div class="page-container">
+              <router-view></router-view>
+            </div>
+            <div class="table-container">
+              <IframeBreadcurmb></IframeBreadcurmb>
+            </div>
+          </div>
+        </main>
       </n-layout-content>
       <n-back-top :right="100" />
     </n-layout>
@@ -22,8 +36,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed, unref, ref, watch } from "vue";
 import { GithubOutlined } from "@vicons/antd";
+import { useRoute, useRouter } from "vue-router";
 import {
   NLayoutSider,
   NLayout,
@@ -31,17 +46,20 @@ import {
   NIcon,
   NBackTop,
   NMenu,
+  NAlert,
+  NLayoutContent,
 } from "naive-ui";
 import Logo from "./Logo.vue";
+import IframeBreadcurmb from "./IframeBreadcurmb.vue";
 
 const menus = [
   {
     label: "事例页面一",
-    key: "/page-one",
+    key: "page-one",
   },
   {
     label: "事例页面二",
-    key: "/page-two",
+    key: "page-two",
   },
 ];
 
@@ -55,9 +73,36 @@ export default defineComponent({
     NBackTop,
     GithubOutlined,
     NMenu,
+    NAlert,
+    IframeBreadcurmb,
+    NLayoutContent,
   },
-  setup() {
-    return { menus };
+  setup(props: any) {
+    const currentRoute = useRoute();
+    const router = useRouter();
+    const selectedKeys = ref<string>(currentRoute.name as string);
+
+    const getSelectedKeys = computed(() => {
+      return unref(selectedKeys);
+    });
+
+    const onMenuClick = (key: string) => {
+      if (/http(s)?:/.test(key)) {
+        window.open(key);
+      } else {
+        router.push(key);
+      }
+    };
+
+    // 跟随页面路由变化，切换菜单选中状态
+    watch(
+      () => currentRoute.fullPath,
+      () => {
+        selectedKeys.value = currentRoute.name as string;
+      }
+    );
+
+    return { menus, onMenuClick, getSelectedKeys };
   },
   methods: {
     onJumpGithub() {
@@ -95,5 +140,29 @@ export default defineComponent({
       cursor: pointer;
     }
   }
+  .layout-content {
+    padding: 14px;
+    // height: 100%;
+    height: calc(100vh - 64px);
+    .container {
+      width: 100%;
+      display: flex;
+      height: 100%;
+    }
+  }
+  .page-container {
+    width: 400px;
+    margin-right: 14px;
+  }
+  .table-container {
+    width: calc(100% - 414px);
+  }
+}
+.n-layout-content {
+  height: calc(100vh - 64px);
+  background-color: rgb(240, 242, 245) !important;
+}
+.n-layout-scroll-container {
+  height: none;
 }
 </style>

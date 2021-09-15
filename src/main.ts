@@ -5,7 +5,7 @@ import router, { setupRouter } from "./router";
 async function bootstrap() {
   const app = createApp(App);
 
-  init({
+  const MitoInstance = init({
     apikey: "abc-123",
     dsn: "/upload",
     maxBreadcrumbs: 100,
@@ -14,7 +14,7 @@ async function bootstrap() {
     enableTraceId: true,
     includeHttpUrlTraceIdRegExp: /.*/,
   });
-
+  (window as any).MitoInstance = MitoInstance;
   // 挂载路由
   await setupRouter(app);
 

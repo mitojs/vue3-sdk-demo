@@ -1,14 +1,5 @@
 <template>
-  <n-button>naive-ui</n-button>
+  <router-view></router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { NButton } from "naive-ui";
-
-export default defineComponent({
-  components: {
-    NButton,
-  },
-});
-</script>
+<script lang="ts"></script>

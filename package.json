@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@mitojs/vue": "^2.1.25",
+    "@vicons/antd": "^0.11.0",
     "axios": "^0.21.1",
     "naive-ui": "^2.16.2",
     "vue": "^3.2.2",

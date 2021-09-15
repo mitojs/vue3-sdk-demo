@@ -423,6 +423,11 @@
   dependencies:
     "@types/yargs-parser" "*"
 
+"@vicons/antd@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@vicons/antd/-/antd-0.11.0.tgz#3d28952d028aed712dca61cb81dbdb11454c5542"
+  integrity sha512-XRkUMJzfjr3Q5S6xbAg4ALI90DIGNhZdbVW6SejFi6EgxB5bts3YMMcM4HbF77vdQX5bhxgju3Hd3uP97OgvAQ==
+
 "@vitejs/plugin-vue-jsx@^1.1.8":
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-1.1.8.tgz#c7b9efd94efe8801635f755b6fd0d0a3a70cf596"

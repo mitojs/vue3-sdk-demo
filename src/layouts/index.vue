@@ -2,11 +2,7 @@
   <n-layout class="layout" has-sider>
     <n-layout-sider width="200" class="layout-sider">
       <Logo></Logo>
-      <n-menu
-        :value="getSelectedKeys"
-        @update:value="onMenuClick"
-        :options="menus"
-      />
+      <n-menu :value="getSelectedKeys" @update:value="onMenuClick" :options="menus" />
     </n-layout-sider>
     <n-layout>
       <n-layout-header class="layout-header" position="static">
@@ -17,9 +13,7 @@
 
       <n-layout-content>
         <main class="layout-content">
-          <n-alert style="margin-bottom: 14px" title="提示信息" type="info">
-            右侧的Breadcrumb组件会实时打印的你操作行为。控制台会打印当前收集的信息
-          </n-alert>
+          <n-alert style="margin-bottom: 14px" title="提示信息" type="info">右侧的Breadcrumb组件会实时打印的你操作行为。控制台会打印当前收集的信息</n-alert>
           <div class="container">
             <div class="page-container">
               <router-view></router-view>
@@ -36,32 +30,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, unref, ref, watch } from "vue";
-import { GithubOutlined } from "@vicons/antd";
-import { useRoute, useRouter } from "vue-router";
-import {
-  NLayoutSider,
-  NLayout,
-  NLayoutHeader,
-  NIcon,
-  NBackTop,
-  NMenu,
-  NAlert,
-  NLayoutContent,
-} from "naive-ui";
-import Logo from "./Logo.vue";
-import IframeBreadcurmb from "./IframeBreadcurmb.vue";
+import { defineComponent, computed, unref, ref, watch } from 'vue'
+import { GithubOutlined } from '@vicons/antd'
+import { useRoute, useRouter } from 'vue-router'
+import { NLayoutSider, NLayout, NLayoutHeader, NIcon, NBackTop, NMenu, NAlert, NLayoutContent } from 'naive-ui'
+import Logo from './Logo.vue'
+import IframeBreadcurmb from './IframeBreadcurmb.vue'
 
 const menus = [
   {
-    label: "事例页面一",
-    key: "page-one",
+    label: '示例页面一',
+    key: 'page-one',
   },
   {
-    label: "事例页面二",
-    key: "page-two",
+    label: '示例页面二',
+    key: 'page-two',
   },
-];
+]
 
 export default defineComponent({
   components: {
@@ -78,38 +63,38 @@ export default defineComponent({
     NLayoutContent,
   },
   setup(props: any) {
-    const currentRoute = useRoute();
-    const router = useRouter();
-    const selectedKeys = ref<string>(currentRoute.name as string);
+    const currentRoute = useRoute()
+    const router = useRouter()
+    const selectedKeys = ref<string>(currentRoute.name as string)
 
     const getSelectedKeys = computed(() => {
-      return unref(selectedKeys);
-    });
+      return unref(selectedKeys)
+    })
 
     const onMenuClick = (key: string) => {
       if (/http(s)?:/.test(key)) {
-        window.open(key);
+        window.open(key)
       } else {
-        router.push(key);
+        router.push(key)
       }
-    };
+    }
 
     // 跟随页面路由变化，切换菜单选中状态
     watch(
       () => currentRoute.fullPath,
       () => {
-        selectedKeys.value = currentRoute.name as string;
+        selectedKeys.value = currentRoute.name as string
       }
-    );
+    )
 
-    return { menus, onMenuClick, getSelectedKeys };
+    return { menus, onMenuClick, getSelectedKeys }
   },
   methods: {
     onJumpGithub() {
-      window.open("https://github.com/mitojs/mitojs", "_blank");
+      window.open('https://github.com/mitojs/mitojs', '_blank')
     },
   },
-});
+})
 </script>
 
 <style lang="less" scoped>

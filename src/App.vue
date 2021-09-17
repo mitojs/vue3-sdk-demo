@@ -1,17 +1,20 @@
 <template>
   <NConfigProvider :theme-overrides="getThemeOverrides">
-    <router-view></router-view>
+    <NMessageProvider>
+      <router-view></router-view>
+    </NMessageProvider>
   </NConfigProvider>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import { NConfigProvider } from "naive-ui";
+import { NConfigProvider, NMessageProvider } from "naive-ui";
 import { lighten, appTheme } from "@/utils";
 
 export default defineComponent({
   components: {
     NConfigProvider,
+    NMessageProvider,
   },
   setup() {
     /**

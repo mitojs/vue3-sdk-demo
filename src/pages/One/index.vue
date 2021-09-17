@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <n-card title="事例页面一">
     <Count></Count>
     <n-space style="margin-top: 10px">
@@ -10,13 +11,23 @@
       <n-button @click="onClickBadFetch">触发异常fetch</n-button>
       <n-button @click="onClickMitoLog">手动上报</n-button>
     </n-space>
+=======
+  <n-card title="示例页面一">
+    <Count></Count>
+>>>>>>> 16cd1fb084e4999177979ee5aae80031088e0175
   </n-card>
 </template>
 
 <script lang="ts">
+<<<<<<< HEAD
 import { defineComponent } from "vue";
 import { NCard, NButton, NSpace, useMessage } from "naive-ui";
 import Count from "./Count.vue";
+=======
+import { defineComponent } from 'vue'
+import { NCard } from 'naive-ui'
+import Count from './Count.vue'
+>>>>>>> 16cd1fb084e4999177979ee5aae80031088e0175
 
 export default defineComponent({
   components: {
@@ -107,7 +118,7 @@ export default defineComponent({
       onClickMitoLog,
     };
   },
-});
+})
 </script>
 
 <style></style>

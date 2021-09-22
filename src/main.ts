@@ -1,29 +1,33 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import { init } from '@mitojs/vue'
-import router, { setupRouter } from './router'
+import { createApp } from "vue";
+import App from "./App.vue";
+import { init } from "@mitojs/browser";
+import { vuePlugin } from "@mitojs/vue";
+import router, { setupRouter } from "./router";
 async function bootstrap() {
-  const app = createApp(App)
+  const app = createApp(App);
 
-  const MitoInstance = init({
-    apikey: 'abc-123',
-    dsn: '/upload',
-    maxBreadcrumbs: 100,
-    debug: true,
-    silentConsole: true,
-    enableTraceId: true,
-    vue: app,
-    includeHttpUrlTraceIdRegExp: /.*/,
-  })
+  const MitoInstance = init(
+    {
+      apikey: "abc-123",
+      dsn: "/upload",
+      maxBreadcrumbs: 100,
+      debug: true,
+      silentConsole: true,
+      enableTraceId: true,
+      vue: app,
+      includeHttpUrlTraceIdRegExp: /.*/,
+    },
+    [vuePlugin]
+  );
 
-  ;(window as any).MitoInstance = MitoInstance
+  (window as any).MitoInstance = MitoInstance;
   // 挂载路由
-  await setupRouter(app)
+  await setupRouter(app);
 
   // 路由准备就绪后挂载APP实例
-  await router.isReady()
+  await router.isReady();
 
-  app.mount('#app', true)
+  app.mount("#app", true);
 }
 
-void bootstrap()
+void bootstrap();

@@ -283,61 +283,60 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@mitojs/browser@2.1.25":
-  version "2.1.25"
-  resolved "https://registry.yarnpkg.com/@mitojs/browser/-/browser-2.1.25.tgz#c0d9cc8a744c0518fefad0193ec8d571c1709153"
-  integrity sha512-TZXRcKT1zx5nHS50xQIu83HLaThVdstyvwAeXaFoqSX3oxTYcrc0BeFqzBhQokMwepUV+jx1xvqvHxXDemQvCw==
+"@mitojs/browser@2.1.26":
+  version "2.1.26"
+  resolved "https://registry.yarnpkg.com/@mitojs/browser/-/browser-2.1.26.tgz#fb35fce404f084150edb5d77c5b23532ea6df6d8"
+  integrity sha512-0fdpPRUPo39rb1mQyyYZlpy9fM+U2shwVAOMG9sVPJ7UYDKRMIQ0awhUTgXCv49ZFe6GXHo6p7w9PzPge0+smA==
   dependencies:
-    "@mitojs/core" "2.1.25"
-    "@mitojs/shared" "2.1.25"
-    "@mitojs/types" "2.1.25"
-    "@mitojs/utils" "2.1.25"
+    "@mitojs/core" "2.1.26"
+    "@mitojs/shared" "2.1.26"
+    "@mitojs/types" "2.1.26"
+    "@mitojs/utils" "2.1.26"
 
-"@mitojs/core@2.1.25":
-  version "2.1.25"
-  resolved "https://registry.yarnpkg.com/@mitojs/core/-/core-2.1.25.tgz#b85986c8f20ec140efb2fdbdf72dda9c355923f0"
-  integrity sha512-qd3Oq8lzrxG9qn3lD/b3NvE/1KlHDFNWj/cmF62vZgUWhs8gEb4vSExYH26luDuu8bWLkZH/7dqUnHQxTJjWjw==
+"@mitojs/core@2.1.26":
+  version "2.1.26"
+  resolved "https://registry.yarnpkg.com/@mitojs/core/-/core-2.1.26.tgz#db8f5ebc81082151778d274cd90ec5b4d2df714f"
+  integrity sha512-CHICPHp9zsuNeGdGZBp6SSA9XCNfTurSf23ccJ47qJSvUhJTvsAH8Zxp4iim2LFYV7h/WZbRzca81AfEolRUQw==
   dependencies:
-    "@mitojs/core" "2.1.25"
-    "@mitojs/shared" "2.1.25"
-    "@mitojs/types" "2.1.25"
-    "@mitojs/utils" "2.1.25"
+    "@mitojs/core" "2.1.26"
+    "@mitojs/shared" "2.1.26"
+    "@mitojs/types" "2.1.26"
+    "@mitojs/utils" "2.1.26"
 
-"@mitojs/shared@2.1.25":
-  version "2.1.25"
-  resolved "https://registry.yarnpkg.com/@mitojs/shared/-/shared-2.1.25.tgz#f3ab370d59f4ca331102705c20daaad290b94d8b"
-  integrity sha512-8FZCqtIOGQDcQv7UsoWIIWMEFSM0bZWmSJALsXsEpF9uILeHAvJkXmykiLj6w/K2FiwynOXb1tkMVwiVDihFXA==
+"@mitojs/shared@2.1.26":
+  version "2.1.26"
+  resolved "https://registry.yarnpkg.com/@mitojs/shared/-/shared-2.1.26.tgz#3b32b51b1387489913da879c98d1afb237c12f52"
+  integrity sha512-mv84onU3M3//yHQR9ftkti7ao51obd4wMtB0TDEx2/Ped2RXjp8lnxKco35LM6npjRGLGP1r9FdT7OV7+GsA5Q==
 
-"@mitojs/types@2.1.25":
-  version "2.1.25"
-  resolved "https://registry.yarnpkg.com/@mitojs/types/-/types-2.1.25.tgz#f4fdd1448227e8989b9cf47b00ae0411910a6276"
-  integrity sha512-gLbL3EGswvc8Yujl0n9t6Wnr4li/kozFDtqxdcZ0eRPoOcJayQ0RPGGcCNkqTs904r8Pa5UHJbuA2agxmYEh7Q==
+"@mitojs/types@2.1.26":
+  version "2.1.26"
+  resolved "https://registry.yarnpkg.com/@mitojs/types/-/types-2.1.26.tgz#c122e8c6191ac49ac665737c0e183ceba15338c3"
+  integrity sha512-UxAEutBlXj93Q3NZNadzzzz4hCThD45vJBMKvi0xLbe+gh0s37TrcEiFb6j8vwFUn+VNXrrNpZHwbkZwxlG33g==
   dependencies:
-    "@mitojs/browser" "2.1.25"
-    "@mitojs/core" "2.1.25"
-    "@mitojs/shared" "2.1.25"
-    "@mitojs/utils" "2.1.25"
+    "@mitojs/browser" "2.1.26"
+    "@mitojs/core" "2.1.26"
+    "@mitojs/shared" "2.1.26"
+    "@mitojs/utils" "2.1.26"
     "@types/wechat-miniprogram" "^3.1.0"
 
-"@mitojs/utils@2.1.25":
-  version "2.1.25"
-  resolved "https://registry.yarnpkg.com/@mitojs/utils/-/utils-2.1.25.tgz#ace827407ddd03bf118cc20c9eec098447a0cd9b"
-  integrity sha512-iYRreGlGCM0k5acV7ZrULG736mEty2928/lNzVSL7mI6Ub35rFjGobQmH513B3HADBJ5VdhO8G/UQn9TA3x0Vg==
+"@mitojs/utils@2.1.26":
+  version "2.1.26"
+  resolved "https://registry.yarnpkg.com/@mitojs/utils/-/utils-2.1.26.tgz#ed14d6657bde9d82679a40f2689f7c58aea9c34e"
+  integrity sha512-DuCTJ/k2Ha2LPSjH4AS9lrrM3k5+1waGQaHP5NWd0q4ocS/1MKJPPkDGTMs2cRei39eMmJV0dquPl10G1UN6HQ==
   dependencies:
-    "@mitojs/browser" "2.1.25"
-    "@mitojs/core" "2.1.25"
-    "@mitojs/shared" "2.1.25"
-    "@mitojs/types" "2.1.25"
+    "@mitojs/browser" "2.1.26"
+    "@mitojs/core" "2.1.26"
+    "@mitojs/shared" "2.1.26"
+    "@mitojs/types" "2.1.26"
 
-"@mitojs/vue@^2.1.25":
-  version "2.1.25"
-  resolved "https://registry.yarnpkg.com/@mitojs/vue/-/vue-2.1.25.tgz#2905a5c106ac0c63c9654136f2de14981a22bce8"
-  integrity sha512-5AUS1oaBGDROffpmUlZdGKBFUXTh6GZhriyV6i6EtF3spDHynkqq3mr8l4N4gUGD+iOeQPxbvf7MBCU8PivnVA==
+"@mitojs/vue@2.1.26":
+  version "2.1.26"
+  resolved "https://registry.yarnpkg.com/@mitojs/vue/-/vue-2.1.26.tgz#35f2df078247f7ec0775b59050953440a930a816"
+  integrity sha512-Rncyg/V7yBI+tfBPuFewET5iv9U0fDNcg2gcLHVT3T0aN5wQjggXUNPNQ0/l7DMZtHw2sIg4QTAsklNbExqICw==
   dependencies:
-    "@mitojs/browser" "2.1.25"
-    "@mitojs/shared" "2.1.25"
-    "@mitojs/types" "2.1.25"
-    "@mitojs/utils" "2.1.25"
+    "@mitojs/shared" "2.1.26"
+    "@mitojs/types" "2.1.26"
+    "@mitojs/utils" "2.1.26"
 
 "@rollup/pluginutils@^4.1.1":
   version "4.1.1"

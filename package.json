@@ -21,8 +21,8 @@
     "vite-plugin-html-config": "^1.0.6"
   },
   "dependencies": {
-    "@mitojs/browser": "2.1.26",
-    "@mitojs/vue": "2.1.26",
+    "@mitojs/browser": "^3.0.0",
+    "@mitojs/vue": "^3.0.0",
     "@vicons/antd": "^0.11.0",
     "axios": "^0.21.1",
     "naive-ui": "^2.16.2",

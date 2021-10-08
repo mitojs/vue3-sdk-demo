@@ -13,7 +13,9 @@
 
       <n-layout-content>
         <main class="layout-content">
-          <n-alert style="margin-bottom: 14px" title="提示信息" type="info">右侧的Breadcrumb组件会实时打印的你操作行为。控制台会打印当前收集的信息</n-alert>
+          <n-alert style="margin-bottom: 14px" title="提示信息" type="info">
+            右侧的Breadcrumb组件会实时打印的你操作行为。控制台会打印当前收集的信息.在控制台输入「MitoInstance」查看当前mito实例
+          </n-alert>
           <div class="container">
             <div class="page-container">
               <router-view></router-view>

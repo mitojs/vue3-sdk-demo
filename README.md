@@ -55,3 +55,11 @@ Vite 的 `base` 固定为 `/vue3-sdk-demo/`，对应组织仓库的 GitHub Pages
 仓库保留现有 GitHub Pages 发布方式：从 `master` 分支的 `/docs` 目录提供 [在线演示](https://mitojs.github.io/vue3-sdk-demo/)。修改源码后运行 `pnpm build`，将更新后的 `docs/` 产物一并提交，不需要修改 Pages 设置。
 
 框架版本依据 [Vue 官方快速开始](https://vuejs.org/guide/quick-start.html) 与 npm registry 核实（2026-11-07）。当前使用 Vue 3.5.45、Vite 8.3.6、vue-tsc 3.3.14；TypeScript 固定为 vue-tsc 支持的 6.0.3。
+
+## 组件与共用资源
+
+`App.vue` 负责组合页面。侧栏、顶栏、场景控制、计数器与网络请求各有独立组件；`ReportMonitor` 组合 `ReportTable`、`ReportRow`、`ReportDetails` 和 `BreadcrumbTimeline`，展示紧凑的记录表、可读详情与完整上报 JSON。
+
+`src/shared/` 中的 `demo-shell.css`、`report-monitor.css`、`report-model.js` 和类型声明在 Vue2、Vue3、React 三个 demo 保持一致，以本仓库为共同源，修改后同步对应文件。各仓库纳入相同版本文件，安装和运行均不依赖本地兄弟目录。搜索只读取当前事件的摘要、来源和状态；三位 HTTP 状态码精确匹配，避免误中堆栈行列号或历史行为。
+
+`pnpm verify` 还会运行共用展示模型的单元测试，再验证真实 SDK 上报、过滤、选行、JSON、清空和移动布局。

@@ -51,6 +51,9 @@ try {
     await expect(
       page.getByTestId("report-list").getByRole("button").first(),
     ).toBeVisible();
+    await expect(
+      page.getByTestId("report-list").getByRole("button").first(),
+    ).toHaveAttribute("aria-pressed", "true");
     return payload;
   }
   result.reports.manual = await reportAfter(
@@ -88,6 +91,51 @@ try {
     (data) => data.data.type === "JAVASCRIPT",
   );
   assert.match(result.reports.code.data.message, /JavaScript 演示异常/);
+  // Hiding HTTP status/source/duration, searching embedded breadcrumbs, or
+  // replacing individual report selection with a grouped record breaks these checks.
+  const reportRows = page.getByTestId("report-list").getByRole("button");
+  await expect(reportRows).toHaveCount(6);
+  const httpRows = reportRows.filter({ hasText: "GET /api/failure" });
+  await expect(httpRows).toHaveCount(2);
+  await expect(httpRows.first()).toContainText("500");
+  await expect(httpRows.filter({ hasText: "Fetch" }).locator(".report-monitor__duration")).toHaveText(`${result.reports.fetch.data.elapsedTime} ms`);
+  await expect(httpRows.filter({ hasText: "XHR" }).locator(".report-monitor__duration")).toHaveText(`${result.reports.xhr.data.elapsedTime} ms`);
+  await expect(httpRows.filter({ hasText: "Fetch" })).toHaveCount(1);
+  await expect(httpRows.filter({ hasText: "XHR" })).toHaveCount(1);
+  await expect(reportRows.filter({ hasText: "VueErrorDemo" })).toHaveCount(1);
+  await expect(reportRows.filter({ hasText: "vue3-demo" })).toHaveCount(1);
+  await expect(reportRows.filter({ hasText: "JavaScript 演示异常" })).toContainText(/index-[\w-]+\.js:\d+:\d+/);
+  await expect(reportRows.filter({ hasText: "Promise 演示异常" })).toContainText(/index-[\w-]+\.js:\d+:\d+/);
+  await reportRows.filter({ hasText: "JavaScript 演示异常" }).click();
+  await expect(page.getByTestId("report-detail").locator("dl")).toContainText(result.reports.code.data.stack[0].url);
+  const search = page.getByRole("textbox", { name: "搜索采集结果" });
+  for (const query of ["HTTP", "500", "/api/failure"]) {
+    await search.fill(query);
+    await expect(reportRows).toHaveCount(2);
+  }
+  await search.fill("Fetch");
+  await expect(reportRows).toHaveCount(1);
+  await reportRows.first().click();
+  await expect(page.getByTestId("report-detail")).toContainText("本地演示服务暂不可用");
+  await expect(page.getByTestId("report-detail")).toContainText("fetch--GET");
+  const rawJSON = page.getByTestId("report-json");
+  await expect(rawJSON).not.toBeVisible();
+  await page.getByText("完整上报 JSON", { exact: true }).click();
+  await expect(rawJSON).toBeVisible();
+  await expect(rawJSON).toContainText('"sdkVersion": "4.0.0-beta.0"');
+  await expect(rawJSON).toContainText('"breadcrumb":');
+  await page.getByText("完整上报 JSON", { exact: true }).click();
+  await search.fill("XHR");
+  await expect(reportRows).toHaveCount(1);
+  await reportRows.first().click();
+  await expect(page.getByTestId("report-detail")).toContainText("xhr--GET");
+  await search.fill("vue3-demo");
+  await expect(reportRows).toHaveCount(1);
+  await expect(page.getByTestId("report-detail")).toContainText("Mito.log");
+  await search.fill("");
+  await httpRows.filter({ hasText: "Fetch" }).click();
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, "Dense desktop report panel fits");
+  await page.screenshot({ path: resolve(evidence, "desktop-reports.png"), fullPage: true });
   await page.getByRole("textbox", { name: "搜索采集结果" }).fill("Promise");
   await expect(page.getByTestId("report-list").getByRole("button")).toHaveCount(
     1,
@@ -101,7 +149,7 @@ try {
   await page.getByRole("textbox", { name: "搜索采集结果" }).fill("");
   await page.getByTestId("report-list").getByRole("button").last().click();
   await expect(page.getByTestId("report-detail")).toContainText(
-    '"customTag": "vue3-demo"',
+    "vue3-demo",
   );
   await page.getByRole("button", { name: "正常 Fetch", exact: true }).click();
   await expect(page.getByRole("status")).toContainText("Fetch 请求成功");
@@ -158,6 +206,12 @@ try {
     await expect(mobilePage.getByTestId("report-detail")).toContainText(
       "sdkVersion",
     );
+    const [httpRequest] = await Promise.all([
+      mobilePage.waitForRequest((request) => request.method() === "POST" && request.url() === new URL("api/report", baseURL).href && request.postDataJSON().data.type === "HTTP"),
+      mobilePage.getByRole("button", { name: "异常 Fetch", exact: true }).click(),
+    ]);
+    assert.equal((await httpRequest.response()).status(), 200);
+    await expect(mobilePage.getByTestId("report-detail")).toContainText("fetch--GET");
     assert.equal(
       await mobilePage.evaluate(
         () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -165,6 +219,10 @@ try {
       true,
       `No horizontal overflow at ${width}px`,
     );
+    await mobilePage.getByText("完整上报 JSON", { exact: true }).click();
+    await expect(mobilePage.getByTestId("report-json")).toBeVisible();
+    assert.equal(await mobilePage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, `Expanded payload fits at ${width}px`);
+    await mobilePage.getByText("完整上报 JSON", { exact: true }).click();
     await mobilePage.screenshot({
       path: resolve(evidence, `viewport-${width}.png`),
       fullPage: true,

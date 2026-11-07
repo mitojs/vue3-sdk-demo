@@ -19,7 +19,7 @@
     "typecheck": "vue-tsc --noEmit",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 2033 --strictPort",
-    "test": "node tests/acceptance.mjs",
+    "test": "node --test tests/report-model.test.mjs && node tests/acceptance.mjs",
     "verify": "pnpm typecheck && pnpm build && pnpm test"
   },
   "dependencies": {

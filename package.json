@@ -1,33 +1,43 @@
 {
-  "name": "mito-vue3-demo",
-  "version": "1.0.0",
-  "repository": "git@github.com:mitojs/vue3-sdk-demo.git",
-  "author": "ahwgs <ah_wgs@126.com>",
-  "license": "MIT",
-  "scripts": {
-    "serve": "npm run dev",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+  "name": "vue3-sdk-demo",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MitoJS Vue 3 交互式 SDK 演示",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mitojs/vue3-sdk-demo.git"
   },
-  "devDependencies": {
-    "@vitejs/plugin-vue": "^1.6.2",
-    "@vitejs/plugin-vue-jsx": "^1.1.8",
-    "@vue/compiler-sfc": "^3.2.11",
-    "less": "^4.1.1",
-    "less-loader": "^10.0.1",
-    "typescript": "^4.4.2",
-    "vite": "^2.5.6",
-    "vite-plugin-html-config": "^1.0.6"
+  "license": "MIT",
+  "packageManager": "pnpm@12.16.1",
+  "engines": {
+    "node": ">=24.22.2",
+    "pnpm": ">=12.16.1"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 2033 --strictPort",
+    "typecheck": "vue-tsc --noEmit",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 2033 --strictPort",
+    "test": "node --test tests/report-model.test.mjs && node tests/acceptance.mjs",
+    "verify": "pnpm typecheck && pnpm build && pnpm test"
   },
   "dependencies": {
-    "@mitojs/browser": "^3.0.0",
-    "@mitojs/vue": "^3.0.0",
-    "@vicons/antd": "^0.11.0",
-    "axios": "^0.21.1",
-    "naive-ui": "^2.16.2",
-    "vue": "^3.2.2",
-    "vue-router": "^4.0.11",
-    "vue-types": "^4.0.0"
+    "@mitojs/browser": "4.0.0",
+    "@mitojs/vue": "4.0.0",
+    "msw": "3.0.4",
+    "vue": "3.5.45"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@vitejs/plugin-vue": "6.0.10",
+    "typescript": "6.0.3",
+    "vite": "8.3.6",
+    "vue-tsc": "3.3.14"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

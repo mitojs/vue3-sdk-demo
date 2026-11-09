@@ -1,33 +1,20 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import { init } from "@mitojs/browser";
-import { vuePlugin } from "@mitojs/vue";
-import router, { setupRouter } from "./router";
+import { initializeMonitoring } from "./monitoring";
+import { startLocalReceiver } from "./mock";
+import "./style.css";
+
 async function bootstrap() {
+  await startLocalReceiver();
   const app = createApp(App);
-
-  const MitoInstance = init(
-    {
-      apikey: "abc-123",
-      dsn: "/upload",
-      maxBreadcrumbs: 100,
-      debug: true,
-      silentConsole: true,
-      enableTraceId: true,
-      vue: app,
-      includeHttpUrlTraceIdRegExp: /.*/,
-    },
-    [vuePlugin]
-  );
-
-  (window as any).MitoInstance = MitoInstance;
-  // 挂载路由
-  await setupRouter(app);
-
-  // 路由准备就绪后挂载APP实例
-  await router.isReady();
-
-  app.mount("#app", true);
+  initializeMonitoring(app);
+  app.mount("#app");
 }
 
-void bootstrap();
+void bootstrap().catch(() => {
+  const root = document.querySelector("#app");
+  if (root) {
+    root.textContent =
+      "本地演示暂未就绪，请允许此页面使用 Service Worker，然后刷新重试。";
+  }
+});

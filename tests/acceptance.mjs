@@ -44,7 +44,7 @@ try {
       page.getByRole("button", { name: button, exact: true }).click(),
     ]);
     const payload = request.postDataJSON();
-    assert.equal(payload.authInfo.sdkVersion, "4.0.0-beta.0");
+    assert.equal(payload.authInfo.sdkVersion, "4.0.0");
     assert.equal(payload.authInfo.sdkName, "mitojs");
     assert.equal((await request.response()).status(), 200);
     assert.ok(payload.breadcrumb.length > 0);
@@ -122,7 +122,7 @@ try {
   await expect(rawJSON).not.toBeVisible();
   await page.getByText("完整上报 JSON", { exact: true }).click();
   await expect(rawJSON).toBeVisible();
-  await expect(rawJSON).toContainText('"sdkVersion": "4.0.0-beta.0"');
+  await expect(rawJSON).toContainText('"sdkVersion": "4.0.0"');
   await expect(rawJSON).toContainText('"breadcrumb":');
   await page.getByText("完整上报 JSON", { exact: true }).click();
   await search.fill("XHR");

@@ -29,7 +29,7 @@ pnpm preview
 
 SDK 通过 `init(options, [vuePlugin])` 初始化，将 `createApp()` 返回的 Vue 应用传给 `options.vue`。浏览器和框架异常由 SDK 自动监听，演示按钮只负责触发场景。组件错误采集后页面仍可继续使用。
 
-SDK 的 `browser` / `vue` 固定为 `4.0.0-beta.1`。本次发布沿用 `@mitojs/shared@4.0.0-beta.0`，所以上报载荷中的 `sdkVersion` 为 `4.0.0-beta.0`；观察窗直接展示实际载荷。
+SDK 的 `browser` / `vue` 固定为正式版 `4.0.0`，上报载荷中的 `sdkVersion` 为 `4.0.0`；观察窗直接展示实际载荷。
 
 ## 本地上报
 

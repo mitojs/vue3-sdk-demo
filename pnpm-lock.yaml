@@ -167,11 +167,11 @@ importers:
   .:
     dependencies:
       '@mitojs/browser':
-        specifier: 4.0.0-beta.1
-        version: 4.0.0-beta.1
+        specifier: 4.0.0
+        version: 4.0.0
       '@mitojs/vue':
-        specifier: 4.0.0-beta.1
-        version: 4.0.0-beta.1
+        specifier: 4.0.0
+        version: 4.0.0
       msw:
         specifier: 3.0.4
         version: 3.0.4(@types/node@26.6.6)(typescript@6.0.3)(vite@8.3.6(@types/node@26.6.6))
@@ -252,23 +252,23 @@ packages:
   '@jridgewell/sourcemap-codec@1.6.0':
     resolution: {integrity: sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==}
 
-  '@mitojs/browser@4.0.0-beta.1':
-    resolution: {integrity: sha512-DaAWKyhZBcl2385WMz6T1DzsnWi0rzSBfH+bkWiiR2qZsWIMPDC6d4Z9blAMZARbqaacxpNAzUtehzusHriuHQ==}
+  '@mitojs/browser@4.0.0':
+    resolution: {integrity: sha512-8OJgCzSEo+5ljZDe+5KzId72xhhYs3oXdb9upYJgMOukyAgKmw1Kt412+4UQzmEe1Qr+Zm5cj15aA/EAxFDYLQ==}
 
-  '@mitojs/core@4.0.0-beta.1':
-    resolution: {integrity: sha512-37XZQKPmQeW/0YVra7FTKbIZWMR36o+PGlbVar3J3vghhZ2mXzEHq/ah7pawyIYNX+uD3mrDINsQjDobXkpAjg==}
+  '@mitojs/core@4.0.0':
+    resolution: {integrity: sha512-+PHcsqljNtU5nlx9QaNNY7jvRBPG8bEHeiCOMFOhYIspcMUQO0IC9NGY8ZcMtDtHuwLv/G2gR1BLDq18/vUi9Q==}
 
-  '@mitojs/shared@4.0.0-beta.0':
-    resolution: {integrity: sha512-9sEhgDcCH84jG8x8PjuolAOd2x4Exncho1ZmEQ+QhRsRYSsCZTH8ofF7nPAGYW15JL7CUEtwRQ1jk1O18BypYA==}
+  '@mitojs/shared@4.0.0':
+    resolution: {integrity: sha512-akFi1/YhPMifNCwsrMpHAZ9nuOLZufXZ20T7Z2DC8GsD1E4Omgzzw2MIUbOaB8CRCkhHW9qMVB3JS1F1cxIw0A==}
 
-  '@mitojs/types@4.0.0-beta.1':
-    resolution: {integrity: sha512-qAyauIeMapV7UvN0+6VkTuTUzXodnBqPWSQNteQcEXa5TFkAzaLtdDnQi2wsKClHPlt/kBe978D2m4Nu7RVdKA==}
+  '@mitojs/types@4.0.0':
+    resolution: {integrity: sha512-wGr2S1PElVDhjBLV11ryyaUTAbjfSP6Q8XPhLiSGDBeJG8Qq6hnXWsD7ddqVzWsLLwEQDIEbxPp/ZWfTdi90Dw==}
 
-  '@mitojs/utils@4.0.0-beta.1':
-    resolution: {integrity: sha512-JTDcv6RgfaKP+iBd6GY4FWbc6JG3EPS53u4fOxsBthQSQyGJfRE7klrrKmhH44x9VuZ4nxhTb3R4dDkw8FIsDA==}
+  '@mitojs/utils@4.0.0':
+    resolution: {integrity: sha512-wzSraMgmA1m1U5Q6Ihk93BpTQCsHuBU5mg/pg5pKQRiEe4etg0w0nOwPiDDg+lSQDqTpa7CpgRh44zZzMx/nOA==}
 
-  '@mitojs/vue@4.0.0-beta.1':
-    resolution: {integrity: sha512-gOKfTupxIChKpIRC3JPDQi4mAzFn+OGyPOKrwkWi9lktvlBgreX0y2ilnT17G5ffxVwof8gF/EObpQCAe4GfOA==}
+  '@mitojs/vue@4.0.0':
+    resolution: {integrity: sha512-3GR8fImMDwOUgE5Ueer4TXyNmoWEjUT6ycvA9Ew8jq88W1zJ4hqlnG5K39niAUittfTGisIumNsS0Ga6O6V86A==}
 
   '@msw/url@0.1.2':
     resolution: {integrity: sha512-DdeBLQxQ+ZrtmwEmaj7GQ7lbzPCgbbbyAqOz/I4ulo68hwBpfdNvQJ5bmihJUkAAKOeCmqCIG3OFZGosqFN4mA==}
@@ -884,38 +884,38 @@ snapshots:
 
   '@jridgewell/sourcemap-codec@1.6.0': {}
 
-  '@mitojs/browser@4.0.0-beta.1':
+  '@mitojs/browser@4.0.0':
     dependencies:
-      '@mitojs/core': 4.0.0-beta.1
-      '@mitojs/shared': 4.0.0-beta.0
-      '@mitojs/types': 4.0.0-beta.1
-      '@mitojs/utils': 4.0.0-beta.1
+      '@mitojs/core': 4.0.0
+      '@mitojs/shared': 4.0.0
+      '@mitojs/types': 4.0.0
+      '@mitojs/utils': 4.0.0
 
-  '@mitojs/core@4.0.0-beta.1':
+  '@mitojs/core@4.0.0':
     dependencies:
-      '@mitojs/shared': 4.0.0-beta.0
-      '@mitojs/types': 4.0.0-beta.1
-      '@mitojs/utils': 4.0.0-beta.1
+      '@mitojs/shared': 4.0.0
+      '@mitojs/types': 4.0.0
+      '@mitojs/utils': 4.0.0
 
-  '@mitojs/shared@4.0.0-beta.0': {}
+  '@mitojs/shared@4.0.0': {}
 
-  '@mitojs/types@4.0.0-beta.1':
+  '@mitojs/types@4.0.0':
     dependencies:
-      '@mitojs/core': 4.0.0-beta.1
-      '@mitojs/shared': 4.0.0-beta.0
-      '@mitojs/utils': 4.0.0-beta.1
+      '@mitojs/core': 4.0.0
+      '@mitojs/shared': 4.0.0
+      '@mitojs/utils': 4.0.0
       '@types/wechat-miniprogram': 3.4.10
 
-  '@mitojs/utils@4.0.0-beta.1':
+  '@mitojs/utils@4.0.0':
     dependencies:
-      '@mitojs/shared': 4.0.0-beta.0
-      '@mitojs/types': 4.0.0-beta.1
+      '@mitojs/shared': 4.0.0
+      '@mitojs/types': 4.0.0
 
-  '@mitojs/vue@4.0.0-beta.1':
+  '@mitojs/vue@4.0.0':
     dependencies:
-      '@mitojs/shared': 4.0.0-beta.0
-      '@mitojs/types': 4.0.0-beta.1
-      '@mitojs/utils': 4.0.0-beta.1
+      '@mitojs/shared': 4.0.0
+      '@mitojs/types': 4.0.0
+      '@mitojs/utils': 4.0.0
 
   '@msw/url@0.1.2': {}
 

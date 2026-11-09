@@ -23,8 +23,8 @@
     "verify": "pnpm typecheck && pnpm build && pnpm test"
   },
   "dependencies": {
-    "@mitojs/browser": "4.0.0-beta.1",
-    "@mitojs/vue": "4.0.0-beta.1",
+    "@mitojs/browser": "4.0.0",
+    "@mitojs/vue": "4.0.0",
     "msw": "3.0.4",
     "vue": "3.5.45"
   },

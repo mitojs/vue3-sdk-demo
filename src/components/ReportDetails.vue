@@ -13,7 +13,7 @@ defineProps<{ report: NormalizedReport }>()
         <h4>{{ report.title }}</h4>
       </div>
       <div class="report-monitor__detail-status">
-        <span v-if="report.status" class="report-monitor__status" :data-error="report.isError">{{ report.status }}</span>
+        <span v-if="report.status" class="report-monitor__status" :data-error="String(report.isError)">{{ report.status }}</span>
         <span v-if="report.duration"> · {{ report.duration }} · </span>
         <span>{{ report.source }}</span>
       </div>

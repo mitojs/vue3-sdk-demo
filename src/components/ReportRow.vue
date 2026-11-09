@@ -13,14 +13,14 @@ const emit = defineEmits<{ select: [id: NormalizedReport['id']] }>()
     :aria-pressed="selected"
     :data-report-id="report.id"
     @click="emit('select', report.id)">
-    <span class="report-monitor__type" :data-type="report.type">{{ report.badge }}</span>
+    <span class="report-monitor__type" :data-type="report.type" :data-error="String(report.isError)">{{ report.badge }}</span>
     <span class="report-monitor__summary">
       <span class="report-monitor__title">{{ report.title }}</span>
       <span v-if="report.location" class="report-monitor__location">{{ report.location }}</span>
     </span>
     <span class="report-monitor__outcome">
       <span v-if="report.status || report.duration" class="report-monitor__outcome-top">
-        <span v-if="report.status" class="report-monitor__status" :data-error="report.isError">{{ report.status }}</span>
+        <span v-if="report.status" class="report-monitor__status" :data-error="String(report.isError)">{{ report.status }}</span>
         <span v-if="report.duration" class="report-monitor__duration">{{ report.duration }}</span>
       </span>
       <span :class="report.type === 'HTTP' ? 'report-monitor__source-detail' : 'report-monitor__source'">{{ report.source }}</span>

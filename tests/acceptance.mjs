@@ -61,6 +61,20 @@ try {
     ).toHaveAttribute("aria-pressed", "true");
     return payload;
   }
+  async function expectHttpColors(row, successful) {
+    const colors = await row.evaluate((element) => {
+      const badge = getComputedStyle(element.querySelector(".report-monitor__type"));
+      const status = getComputedStyle(element.querySelector(".report-monitor__status"));
+      return { badge: badge.color, background: badge.backgroundColor, status: status.color };
+    });
+    colors.detailStatus = await page.getByTestId("report-detail").locator(".report-monitor__status")
+      .evaluate((element) => getComputedStyle(element).color);
+    for (const [part, color] of Object.entries(colors)) {
+      const [red, green, blue] = color.match(/\d+/g).map(Number);
+      assert.ok(successful ? green > red && green > blue : red > green && red > blue,
+        `${part} should be ${successful ? "green" : "red"} for HTTP ${successful ? 200 : 500}, got ${color}`);
+    }
+  }
   result.reports.manual = await reportAfter(
     "手动上报",
     (data) => data.data.type === "LOG",
@@ -107,6 +121,12 @@ try {
   await expect(httpRows.filter({ hasText: "XHR" }).locator(".report-monitor__duration")).toHaveText(`${result.reports.xhr.data.elapsedTime} ms`);
   await expect(httpRows.filter({ hasText: "Fetch" })).toHaveCount(1);
   await expect(httpRows.filter({ hasText: "XHR" })).toHaveCount(1);
+  for (const source of ["Fetch", "XHR"]) {
+    const row = httpRows.filter({ hasText: source });
+    await row.click();
+    await expectHttpColors(row, false);
+  }
+  await page.screenshot({ path: resolve(evidence, "http-error.png"), fullPage: true });
   await expect(reportRows.filter({ hasText: "VueErrorDemo" })).toHaveCount(1);
   await expect(reportRows.filter({ hasText: "vue3-demo" })).toHaveCount(1);
   await expect(reportRows.filter({ hasText: "JavaScript 演示异常" })).toContainText(/index-[\w-]+\.js:\d+:\d+/);
@@ -178,12 +198,14 @@ try {
     await expect(successRow).toHaveCount(1);
     await expect(successRow).toHaveAttribute("aria-pressed", "true");
     await expect(successRow.locator(".report-monitor__status")).toHaveText("200");
+    await expectHttpColors(successRow, true);
     await expect(successRow.locator(".report-monitor__duration")).toHaveText(`${payload.data.elapsedTime} ms`);
     await expect(page.getByTestId("report-detail")).toContainText("本地演示请求已完成");
     await page.getByText("完整上报 JSON", { exact: true }).click();
     assert.deepEqual(JSON.parse(await rawJSON.textContent()), payload);
     await page.getByText("完整上报 JSON", { exact: true }).click();
   }
+  await page.screenshot({ path: resolve(evidence, "http-success.png"), fullPage: true });
   for (const httpType of ["fetch", "xhr"]) {
     for (const status of [200, 500]) {
       assert.equal(uploads.filter((payload) => payload.data.type === "HTTP" &&

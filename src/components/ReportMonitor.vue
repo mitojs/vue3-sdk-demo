@@ -73,7 +73,7 @@ function clearRecords() {
       <div v-if="!state.reports.length" class="report-monitor__empty">
         <span class="report-monitor__empty-icon"><Icon name="stack" /></span>
         <h4>还没有上报记录</h4>
-        <p>触发左侧任意异常场景，第一条记录就会出现在这里。</p>
+        <p>触发左侧异常场景或正常、异常网络请求，第一条记录就会出现在这里。</p>
         <span class="report-monitor__empty-hint">等待你的第一次触发</span>
       </div>
       <template v-else>

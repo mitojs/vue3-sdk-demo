@@ -25,6 +25,11 @@ try {
       result.externalRequests.push(request.url());
   });
   page = await context.newPage();
+  const uploads = [];
+  page.on("request", (request) => {
+    if (request.method() === "POST" && request.url() === new URL("api/report", baseURL).href)
+      uploads.push(request.postDataJSON());
+  });
   await page.goto(baseURL);
   await expect(
     page.getByRole("heading", { name: "Vue 3 SDK 演示", exact: true }),
@@ -151,10 +156,41 @@ try {
   await expect(page.getByTestId("report-detail")).toContainText(
     "vue3-demo",
   );
-  await page.getByRole("button", { name: "正常 Fetch", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText("Fetch 请求成功");
-  await page.getByRole("button", { name: "正常 XHR", exact: true }).click();
-  await expect(page.getByRole("status")).toContainText("XHR 请求成功");
+  // Dropping successful HTTP captures must fail on the missing real SDK POST,
+  // even when the request itself succeeds and the notice is displayed.
+  for (const [key, button, httpType, rowCount] of [
+    ["fetchSuccess", "正常 Fetch", "fetch", 7],
+    ["xhrSuccess", "正常 XHR", "xhr", 8],
+  ]) {
+    const payload = await reportAfter(
+      button,
+      (data) => data.data.type === "HTTP" &&
+        data.data.request.httpType === httpType &&
+        data.data.request.url === new URL("api/success", baseURL).href &&
+        data.data.response.status === 200,
+    );
+    result.reports[key] = payload;
+    assert.equal(payload.data.request.method, "GET");
+    assert.equal(payload.data.request.httpType, httpType);
+    assert.equal(payload.data.response.status, 200);
+    await expect(reportRows).toHaveCount(rowCount);
+    const successRow = reportRows.filter({ hasText: "GET /api/success" }).filter({ hasText: httpType === "fetch" ? "Fetch" : "XHR" });
+    await expect(successRow).toHaveCount(1);
+    await expect(successRow).toHaveAttribute("aria-pressed", "true");
+    await expect(successRow.locator(".report-monitor__status")).toHaveText("200");
+    await expect(successRow.locator(".report-monitor__duration")).toHaveText(`${payload.data.elapsedTime} ms`);
+    await expect(page.getByTestId("report-detail")).toContainText("本地演示请求已完成");
+    await page.getByText("完整上报 JSON", { exact: true }).click();
+    assert.deepEqual(JSON.parse(await rawJSON.textContent()), payload);
+    await page.getByText("完整上报 JSON", { exact: true }).click();
+  }
+  for (const httpType of ["fetch", "xhr"]) {
+    for (const status of [200, 500]) {
+      assert.equal(uploads.filter((payload) => payload.data.type === "HTTP" &&
+        payload.data.request.httpType === httpType && payload.data.response.status === status).length, 1);
+    }
+  }
+  assert.equal(uploads.length, 8, "Successful requests and errors each upload once without capturing the report endpoint");
   await page.getByRole("button", { name: "增加计数", exact: true }).click();
   await expect(page.getByTestId("counter")).toHaveText("1");
   await page

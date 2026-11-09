@@ -17,14 +17,14 @@ defineProps<{ isBehavior: boolean; reports: number; breadcrumbs: number }>()
     <Icon name="info" />
     <div>
       <strong>点击左侧场景，实时查看采集结果</strong>
-      <p>异常会自动生成上报记录，日常操作会留在行为轨迹中。所有演示数据仅在当前浏览器内接收。</p>
+      <p>异常及正常、异常请求都会生成上报记录，日常操作会留在行为轨迹中。所有演示数据仅在当前浏览器内接收。</p>
     </div>
     <span class="banner-badge">实时采集</span>
   </div>
   <div class="section-intro">
     <div>
       <h2>{{ isBehavior ? '每一步操作，都有迹可循。' : '试着触发一个场景' }}</h2>
-      <p>{{ isBehavior ? '还原异常发生前的点击、请求与页面跳转。' : '选择一种异常，右侧即刻呈现完整上报。' }}</p>
+      <p>{{ isBehavior ? '还原异常发生前的点击、请求与页面跳转。' : '触发异常或网络请求，右侧即刻呈现完整上报。' }}</p>
     </div>
     <span class="section-count">{{ reports }} 条上报<span>·</span>{{ breadcrumbs }} 个行为</span>
   </div>

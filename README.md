@@ -23,13 +23,15 @@ pnpm preview
 ## 可以体验什么
 
 - **异常演示**：手动日志上报、Vue 组件事件错误、Promise 未处理拒绝、JavaScript 全局异常。
-- **网络请求**：Fetch / XHR 的正常响应与 HTTP 500，异常由 SDK 自动采集。
+- **网络请求**：Fetch / XHR 的正常响应与 HTTP 500 都会采集到上报记录，展示状态、来源、耗时和完整载荷。
 - **行为轨迹**：查看真实 SDK 收集的点击、路由、请求和异常上下文。
 - **实时观察窗**：本地接收的上报列表、搜索、详情切换、完整 JSON 与清空记录。
 
 SDK 通过 `init(options, [vuePlugin])` 初始化，将 `createApp()` 返回的 Vue 应用传给 `options.vue`。浏览器和框架异常由 SDK 自动监听，演示按钮只负责触发场景。组件错误采集后页面仍可继续使用。
 
 SDK 的 `browser` / `vue` 固定为正式版 `4.0.0`，上报载荷中的 `sdkVersion` 为 `4.0.0`；观察窗直接展示实际载荷。
+
+SDK 默认只上报 HTTP 异常。演示在 `beforePushBreadcrumb` 中将 SDK 自动采集的 HTTP 200–399 数据通过原有 transport 上报，保留真实请求和响应字段；异常继续由 SDK 自身上报。本地接收器读取实际 POST 后才更新上报记录。
 
 ## 本地上报
 
